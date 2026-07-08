@@ -89,3 +89,30 @@ def plot_temperature():
     def plot_ph():
         figr, ax = plt.subplots(figsize=(11, 6))
         pHrange = np.linspace(5.0, 10.5, 400)
+
+        wt_ph = activity_vs_ph(pHrange, WILD_TYPE)
+        mm_ph = activity_vs_ph(pHrange, MARINE_TYPE)
+
+        ax.plot(pHrange, wt_ph, label=WILD_TYPE['name'], color=WILD_TYPE['colour'])
+        ax.plot(pHrange, mm_ph, label=MARINE_TYPE['name'], color=MARINE_TYPE['colour'])
+
+        acidic_refs = [
+            (8.1, '#2d6a4f', 'Ocean surface pH (8.1)'),
+            (7.9, 'f4a261', 'Projected ocean acidification (7.9)'),
+            (7.5, '#e63946', 'Worst-case pH (7.5)'),
+        ]
+        for pH_val, color, label in acidic_refs:
+            ax.axvline(pH_val, color=color, linestyle='--', alpha=0.8, linewidth=1.5)
+            ax.text(pH_val + 0.05, 104, label, rotation=90, fontsize=8,color=color, va='top', ha='left')
+
+        ax.set_xlabel('pH')
+        ax.set_ylabel('Relative Activity (% of Vmax)')
+        ax.set_title('Figure 2: pH Activity of PETase Wild Type and Marine Type')
+        ax.set_xlim(5.0, 10.5)
+        ax.set_ylim(0, 115)
+        ax.legend(loc='upper right')
+
+        plt.tight_layout()
+        plt.savefig('figures/figure2_ph_comparison.png', dpi=300, bbox_inches='tight', facecolor='white')
+        plt.show()
+        print("Saved Figure2 pH Comparison.png")
