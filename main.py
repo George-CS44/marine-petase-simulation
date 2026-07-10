@@ -116,3 +116,33 @@ def plot_temperature():
         plt.savefig('figures/figure2_ph_comparison.png', dpi=300, bbox_inches='tight', facecolor='white')
         plt.show()
         print("Saved Figure2 pH Comparison.png")
+
+    def plot_kinetics():
+        fig, ax = plt.subplots(figsize=(11, 6))
+        S_range = np.linspace(0, 5, 400)
+        T_ocean = 8 
+
+        wt_theoretical = michaelis_menten_temp_scaled(S_range, WILD_TYPE[Vmax], WILD_TYPE[Km])
+        mm_theoretical = michaelis_menten_temp_scaled(S_range, MARINE_TYPE[Vmax], MARINE_TYPE[Km])
+        wt_AT_8 = michaelis_menten(S_range, T_ocean, WILD_TYPE)
+        mm_AT_8 = michaelis_menten(S_range, T_ocean, MARINE_TYPE)
+
+        ax.plot(S_range, wt_theoretical, color=WILD_TYPE['colour'], linestyle='--', alpha=0.4, label='WT Theoretical Max')
+        ax.plot(S_range, mm_theoretical, color=MARINE_TYPE['colour'], linestyle='--', alpha=0.4, label='Marine Theoretical Max')
+        ax.plot(S_range, wt_AT_8, color=WILD_TYPE['colour'], label='WT at 8°C')
+        ax.plot(S_range, mm_AT_8, color=MARINE_TYPE['colour'], label='Marine at 8°C')
+
+        ax.axvspan(0, 0.5, alpha=0.07, color='steelblue', label='Typical ocean PET concentration range (0-0.5 mM)')
+
+        ax.set_xlabel('[PET Substrate] (mM)')
+        ax.set_ylabel('Relative Velocity (% of Vmax)')
+        ax.set_title('Figure 3: Michaelis-Menten Kinetics of PETase Variants at 8°C')
+        ax.set_xlim(0, 5)
+        ax.set_ylim(0)
+        ax.legend(loc='lower right')
+
+        plt.tight_layout()
+        plt.savefig('figures/figure3_kinetics_comparison.png', dpi=300, bbox_inches='tight', facecolor='white')
+
+        plt.show()
+        print("Saved Figure3 Kinetics Comparison.png")
