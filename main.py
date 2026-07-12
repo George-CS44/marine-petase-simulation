@@ -86,63 +86,69 @@ def plot_temperature():
     plt.show()
     print("Saved Figure1 Temperature Comparison.png")
 
-    def plot_ph():
-        figr, ax = plt.subplots(figsize=(11, 6))
-        pHrange = np.linspace(5.0, 10.5, 400)
+def plot_ph():
+    figr, ax = plt.subplots(figsize=(11, 6))
+    pHrange = np.linspace(5.0, 10.5, 400)
 
-        wt_ph = activity_vs_ph(pHrange, WILD_TYPE)
-        mm_ph = activity_vs_ph(pHrange, MARINE_TYPE)
+    wt_ph = activity_vs_ph(pHrange, WILD_TYPE)
+    mm_ph = activity_vs_ph(pHrange, MARINE_TYPE)
 
-        ax.plot(pHrange, wt_ph, label=WILD_TYPE['name'], color=WILD_TYPE['colour'])
-        ax.plot(pHrange, mm_ph, label=MARINE_TYPE['name'], color=MARINE_TYPE['colour'])
+    ax.plot(pHrange, wt_ph, label=WILD_TYPE['name'], color=WILD_TYPE['colour'])
+    ax.plot(pHrange, mm_ph, label=MARINE_TYPE['name'], color=MARINE_TYPE['colour'])
 
-        acidic_refs = [
-            (8.1, '#2d6a4f', 'Ocean surface pH (8.1)'),
-            (7.9, 'f4a261', 'Projected ocean acidification (7.9)'),
-            (7.5, '#e63946', 'Worst-case pH (7.5)'),
-        ]
-        for pH_val, color, label in acidic_refs:
-            ax.axvline(pH_val, color=color, linestyle='--', alpha=0.8, linewidth=1.5)
-            ax.text(pH_val + 0.05, 104, label, rotation=90, fontsize=8,color=color, va='top', ha='left')
+    acidic_refs = [
+        (8.1, '#2d6a4f', 'Ocean surface pH (8.1)'),
+        (7.9, 'f4a261', 'Projected ocean acidification (7.9)'),
+        (7.5, '#e63946', 'Worst-case pH (7.5)'),
+    ]
+    for pH_val, color, label in acidic_refs:
+        ax.axvline(pH_val, color=color, linestyle='--', alpha=0.8, linewidth=1.5)
+        ax.text(pH_val + 0.05, 104, label, rotation=90, fontsize=8,color=color, va='top', ha='left')
 
-        ax.set_xlabel('pH')
-        ax.set_ylabel('Relative Activity (% of Vmax)')
-        ax.set_title('Figure 2: pH Activity of PETase Wild Type and Marine Type')
-        ax.set_xlim(5.0, 10.5)
-        ax.set_ylim(0, 115)
-        ax.legend(loc='upper right')
+    ax.set_xlabel('pH')
+    ax.set_ylabel('Relative Activity (% of Vmax)')
+    ax.set_title('Figure 2: pH Activity of PETase Wild Type and Marine Type')
+    ax.set_xlim(5.0, 10.5)
+    ax.set_ylim(0, 115)
+    ax.legend(loc='upper right')
 
-        plt.tight_layout()
-        plt.savefig('figures/figure2_ph_comparison.png', dpi=300, bbox_inches='tight', facecolor='white')
-        plt.show()
-        print("Saved Figure2 pH Comparison.png")
+    plt.tight_layout()
+    plt.savefig('figures/figure2_ph_comparison.png', dpi=300, bbox_inches='tight', facecolor='white')
+    plt.show()
+    print("Saved Figure2 pH Comparison.png")
 
-    def plot_kinetics():
-        fig, ax = plt.subplots(figsize=(11, 6))
-        S_range = np.linspace(0, 5, 400)
-        T_ocean = 8 
+def plot_kinetics():
+    fig, ax = plt.subplots(figsize=(11, 6))
+    S_range = np.linspace(0, 5, 400)
+    T_ocean = 8 
 
-        wt_theoretical = michaelis_menten_temp_scaled(S_range, WILD_TYPE[Vmax], WILD_TYPE[Km])
-        mm_theoretical = michaelis_menten_temp_scaled(S_range, MARINE_TYPE[Vmax], MARINE_TYPE[Km])
-        wt_AT_8 = michaelis_menten(S_range, T_ocean, WILD_TYPE)
-        mm_AT_8 = michaelis_menten(S_range, T_ocean, MARINE_TYPE)
+    wt_theoretical = michaelis_menten_temp_scaled(S_range, WILD_TYPE[Vmax], WILD_TYPE[Km])
+    mm_theoretical = michaelis_menten_temp_scaled(S_range, MARINE_TYPE[Vmax], MARINE_TYPE[Km])
+    wt_AT_8 = michaelis_menten(S_range, T_ocean, WILD_TYPE)
+    mm_AT_8 = michaelis_menten(S_range, T_ocean, MARINE_TYPE)
 
-        ax.plot(S_range, wt_theoretical, color=WILD_TYPE['colour'], linestyle='--', alpha=0.4, label='WT Theoretical Max')
-        ax.plot(S_range, mm_theoretical, color=MARINE_TYPE['colour'], linestyle='--', alpha=0.4, label='Marine Theoretical Max')
-        ax.plot(S_range, wt_AT_8, color=WILD_TYPE['colour'], label='WT at 8°C')
-        ax.plot(S_range, mm_AT_8, color=MARINE_TYPE['colour'], label='Marine at 8°C')
+    ax.plot(S_range, wt_theoretical, color=WILD_TYPE['colour'], linestyle='--', alpha=0.4, label='WT Theoretical Max')
+    ax.plot(S_range, mm_theoretical, color=MARINE_TYPE['colour'], linestyle='--', alpha=0.4, label='Marine Theoretical Max')
+    ax.plot(S_range, wt_AT_8, color=WILD_TYPE['colour'], label='WT at 8°C')
+    ax.plot(S_range, mm_AT_8, color=MARINE_TYPE['colour'], label='Marine at 8°C')
 
-        ax.axvspan(0, 0.5, alpha=0.07, color='steelblue', label='Typical ocean PET concentration range (0-0.5 mM)')
+    ax.axvspan(0, 0.5, alpha=0.07, color='steelblue', label='Typical ocean PET concentration range (0-0.5 mM)')
 
-        ax.set_xlabel('[PET Substrate] (mM)')
-        ax.set_ylabel('Relative Velocity (% of Vmax)')
-        ax.set_title('Figure 3: Michaelis-Menten Kinetics of PETase Variants at 8°C')
-        ax.set_xlim(0, 5)
-        ax.set_ylim(0)
-        ax.legend(loc='lower right')
+    ax.set_xlabel('[PET Substrate] (mM)')
+    ax.set_ylabel('Relative Velocity (% of Vmax)')
+    ax.set_title('Figure 3: Michaelis-Menten Kinetics of PETase Variants at 8°C')
+    ax.set_xlim(0, 5)
+    ax.set_ylim(0)
+    ax.legend(loc='lower right')
 
-        plt.tight_layout()
-        plt.savefig('figures/figure3_kinetics_comparison.png', dpi=300, bbox_inches='tight', facecolor='white')
+    plt.tight_layout()
+    plt.savefig('figures/figure3_kinetics_comparison.png', dpi=300, bbox_inches='tight', facecolor='white')
 
-        plt.show()
-        print("Saved Figure3 Kinetics Comparison.png")
+    plt.show()
+    print("Saved Figure3 Kinetics Comparison.png")
+
+def plot_heatmaps():
+    T_vals = np.linspace(0, 30, 200)
+    pH_vals = np.linspace(7.0, 8.8, 200)
+
+    
