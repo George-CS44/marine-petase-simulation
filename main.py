@@ -151,4 +151,54 @@ def plot_heatmaps():
     T_vals = np.linspace(0, 30, 200)
     pH_vals = np.linspace(7.0, 8.8, 200)
 
-    
+    wt_map = generate_environmental_heatmap(T_vals, pH_vals, WILD_TYPE)
+    mm_map = generate_environmental_heatmap(T_vals, pH_vals, MARINE_TYPE)
+
+    (Temperature °C, pH, label)
+    ocean_sites = [
+        (8, 8.05, 'North Atlantic Ocean'),
+        (28, 8.10, 'Carribean Sea'),
+        (1, 8.00, 'Arctic Ocean'),
+        (15, 7.60, 'Acidified Ocean'),
+    ]
+    fig, axs = plt.subplots(1, 2, figsize=(15, 6))
+    vmax_val = max(wt_map.max(), mm_map.max())
+
+    for ax, data, enzyme in zip(axes, [wt_map, mm_map], [WILD_TYPE, MARINE_TYPE]):
+        im = ax.imshow(
+            data,
+            aspect='auto',
+            origin='lower',
+            extent=[T_vals[0], T_vals[-1], pH_vals[0], pH_vals[-1]],
+            cmap='YlOrRd',
+            vmin=0,
+            vmax=vmax_val,
+        )
+        for T_s, pH_s, label in ocean_sites:
+            ax.scatter(T_s, pH_s, color='white', edgecolor='black', s=80, zorder=5, linewidth=1.2)
+            ax.annotate(
+                site_label, (T_s, pH_s),
+                xytext=(5, 5), textcoords='offset points',
+                fontsize=9, fontweight='bold', color='weight',
+                path_effects=[pef.withStroke(linewidth=2, foreground='black')]
+            )
+        ax.set_xlabel('Temperature (°C)')
+        ax.set_ylabel('pH')
+        ax.set_title(enzyme['name'])
+
+    cbar = fig.colorbar(im, ax=axs.tolist(), shrink=0.85, pad=0.02)
+    cbar.set_label('Relative Activity (% of Vmax)')
+    fig.suptitle('Figure 4: Environmental Heatmaps of PETase Variants', fontsize=13, fontweight='bold')
+
+    plt.tight_layout()
+    plt.savefig('figures/figure4_heatmaps.png', dpi=300, bbox_inches='tight', facecolor='white')
+    plt.show()
+    print("Saved Figure4 Heatmaps.png")
+
+if __name__ == "__main__":
+    print("Running Marine PETase Simulation......")
+    plot_temperature()
+    plot_ph()
+    plot_kinetics()
+    plot_heatmaps()
+    print("All figures generated and saved in'/figures'.")
