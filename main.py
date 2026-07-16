@@ -46,7 +46,7 @@ plt.rcParams.update({
     'axes.grid': True,
     'grid.alpha': 0.4,
     'lines.linewidth': 2.5,
-    'legend.framalpha': 0.9,
+    'legend.framealpha': 0.9,
 })
 
 os.makedirs('figures', exist_ok=True)
