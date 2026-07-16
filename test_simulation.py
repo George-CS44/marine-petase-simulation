@@ -12,6 +12,7 @@ params = {
 }
 
 def test_arrhenius_at_optimal_temperature():
+    result = arrhenius_normalised(T_celsius=25, Ea=50000, T_opt_celsius=25)
     assert result == 1.0
 def test_ph_returns_positive_activity():
     assert activity_vs_ph(8.1, params) > 0
