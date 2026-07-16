@@ -71,7 +71,7 @@ def plot_temperature():
     ]
     for T_val, color, label in refs:
         ax.axvline(T_val, color=color, linestyle='--', alpha=0.75, linewidth=1.5)
-        ax.text(T_val + 0.5, 104, label, rotation=90, fontsize=10,color=col, va='top', ha='left')
+        ax.text(T_val + 0.5, 104, label, rotation=90, fontsize=10,color=color, va='top', ha='left')
 
     ax.set_xlabel('Temperature (°C)')
     ax.set_ylabel('Relative Activity (% ofVmax)')
@@ -174,7 +174,7 @@ def plot_heatmaps():
             vmin=0,
             vmax=vmax_val,
         )
-        for T_s, pH_s, label in ocean_sites:
+        for T_s, pH_s, site_label in ocean_sites:
             ax.scatter(T_s, pH_s, color='white', edgecolor='black', s=80, zorder=5, linewidth=1.2)
             ax.annotate(
                 site_label, (T_s, pH_s),
