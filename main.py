@@ -122,8 +122,8 @@ def plot_kinetics():
     S_range = np.linspace(0, 5, 400)
     T_ocean = 8 
 
-    wt_theoretical = michaelis_menten_temp_scaled(S_range, WILD_TYPE[Vmax], WILD_TYPE[Km])
-    mm_theoretical = michaelis_menten_temp_scaled(S_range, MARINE_TYPE[Vmax], MARINE_TYPE[Km])
+    wt_theoretical = michaelis_menten_temp_scaled(S_range, WILD_TYPE['Vmax'], WILD_TYPE['Km'])
+    mm_theoretical = michaelis_menten_temp_scaled(S_range, MARINE_TYPE['Vmax'], MARINE_TYPE['Km'])
     wt_AT_8 = michaelis_menten(S_range, T_ocean, WILD_TYPE)
     mm_AT_8 = michaelis_menten(S_range, T_ocean, MARINE_TYPE)
 
@@ -164,7 +164,7 @@ def plot_heatmaps():
     fig, axs = plt.subplots(1, 2, figsize=(15, 6))
     vmax_val = max(wt_map.max(), mm_map.max())
 
-    for ax, data, enzyme in zip(axes, [wt_map, mm_map], [WILD_TYPE, MARINE_TYPE]):
+    for ax, data, enzyme in zip(axs, [wt_map, mm_map], [WILD_TYPE, MARINE_TYPE]):
         im = ax.imshow(
             data,
             aspect='auto',
