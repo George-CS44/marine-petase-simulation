@@ -122,8 +122,8 @@ def plot_kinetics():
     S_range = np.linspace(0, 5, 400)
     T_ocean = 8 
 
-    wt_theoretical = michaelis(S_range, WILD_TYPE['Vmax'], WILD_TYPE['Km'])
-    mm_theoretical = michaelis(S_range, MARINE_TYPE['Vmax'], MARINE_TYPE['Km'])
+    wt_theoretical = michaelis_menten(S_range, WILD_TYPE['Vmax'], WILD_TYPE['Km'])
+    mm_theoretical = michaelis_menten(S_range, MARINE_TYPE['Vmax'], MARINE_TYPE['Km'])
     wt_AT_8 = michaelis_menten_temp_scaled(S_range, T_ocean, WILD_TYPE)
     mm_AT_8 = michaelis_menten_temp_scaled(S_range, T_ocean, MARINE_TYPE)
 
