@@ -151,8 +151,8 @@ def plot_heatmaps():
     T_vals = np.linspace(0, 30, 200)
     pH_vals = np.linspace(7.0, 8.8, 200)
 
-    wt_map = generate_environmental_heatmap(T_vals, pH_vals, WILD_TYPE)
-    mm_map = generate_environmental_heatmap(T_vals, pH_vals, MARINE_TYPE)
+    wt_map = gen_environmental_heatmap(T_vals, pH_vals, WILD_TYPE)
+    mm_map = gen_environmental_heatmap(T_vals, pH_vals, MARINE_TYPE)
 
     ("Temperature °C, pH, label")
     ocean_sites = [
