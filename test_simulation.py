@@ -1,5 +1,5 @@
 import numpy as np
-from src.temperature_model import activity_vs_temperature
+from src.temperature_model import activity_vs_temperature, arrhenius_normalised
 from src.ph_model import activity_vs_ph
 
 params = {
