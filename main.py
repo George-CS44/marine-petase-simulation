@@ -61,13 +61,13 @@ def plot_temperature():
     ax.plot(T_range, wt_act, label=WILD_TYPE['name'], color=WILD_TYPE['colour'])
     ax.plot(T_range, mm_act, label=MARINE_TYPE['name'], color=MARINE_TYPE['colour'])
 
-    ax.axvspan(-2, 20, aplha=0.08, color='steelblue', label='Marine surface range(0-20°C)')
+    ax.axvspan(-2, 20, alpha=0.08, color='steelblue', label='Marine surface range(0-20°C)')
 
     refs = [
         (4, '#0077b6', 'Deep ocean (4°C)'),
         (8 , '#00b4d8', 'Marine surface (8°C)'),
         (17, '#90e0ef', 'Tropical surface (17°C)'),
-        (25, 'ef233c', 'Mutant Denaturation (25°C)'),
+        (25, '#ef233c', 'Mutant Denaturation (25°C)'),
     ]
     for T_val, color, label in refs:
         ax.axvline(T_val, color=color, linestyle='--', alpha=0.75, linewidth=1.5)
@@ -76,8 +76,8 @@ def plot_temperature():
     ax.set_xlabel('Temperature (°C)')
     ax.set_ylabel('Relative Activity (% ofVmax)')
     ax.set_title('Temperature Activity of PETase variants')
-    ax.set_ylim(-2, 58)
-    ax.set_xlim(0, 115)
+    ax.set_xlim(-2, 58)
+    ax.set_ylim(0, 115)
     ax.legend(loc='upper right')
 
     plt.tight_layout()
@@ -98,7 +98,7 @@ def plot_ph():
 
     acidic_refs = [
         (8.1, '#2d6a4f', 'Ocean surface pH (8.1)'),
-        (7.9, 'f4a261', 'Projected ocean acidification (7.9)'),
+        (7.9, '#f4a261', 'Projected ocean acidification (7.9)'),
         (7.5, '#e63946', 'Worst-case pH (7.5)'),
     ]
     for pH_val, color, label in acidic_refs:
@@ -122,10 +122,10 @@ def plot_kinetics():
     S_range = np.linspace(0, 5, 400)
     T_ocean = 8 
 
-    wt_theoretical = michaelis_menten_temp_scaled(S_range, WILD_TYPE['Vmax'], WILD_TYPE['Km'])
-    mm_theoretical = michaelis_menten_temp_scaled(S_range, MARINE_TYPE['Vmax'], MARINE_TYPE['Km'])
-    wt_AT_8 = michaelis_menten(S_range, T_ocean, WILD_TYPE)
-    mm_AT_8 = michaelis_menten(S_range, T_ocean, MARINE_TYPE)
+    wt_theoretical = michaelis(S_range, WILD_TYPE['Vmax'], WILD_TYPE['Km'])
+    mm_theoretical = michaelis(S_range, MARINE_TYPE['Vmax'], MARINE_TYPE['Km'])
+    wt_AT_8 = michaelis_menten_temp_scaled(S_range, T_ocean, WILD_TYPE)
+    mm_AT_8 = michaelis_menten_temp_scaled(S_range, T_ocean, MARINE_TYPE)
 
     ax.plot(S_range, wt_theoretical, color=WILD_TYPE['colour'], linestyle='--', alpha=0.4, label='WT Theoretical Max')
     ax.plot(S_range, mm_theoretical, color=MARINE_TYPE['colour'], linestyle='--', alpha=0.4, label='Marine Theoretical Max')
