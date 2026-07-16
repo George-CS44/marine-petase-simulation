@@ -154,7 +154,7 @@ def plot_heatmaps():
     wt_map = generate_environmental_heatmap(T_vals, pH_vals, WILD_TYPE)
     mm_map = generate_environmental_heatmap(T_vals, pH_vals, MARINE_TYPE)
 
-    (Temperature °C, pH, label)
+    ("Temperature °C, pH, label")
     ocean_sites = [
         (8, 8.05, 'North Atlantic Ocean'),
         (28, 8.10, 'Carribean Sea'),

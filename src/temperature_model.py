@@ -11,4 +11,4 @@ def denature_factor(T_celsius, T_den_celsius, kappa=0.8):
 def activity_vs_temperature(T_celsius, params):
     arr = arrhenius_normalised(T_celsius, params['Ea'], params['T_opt'])
     den = denature_factor(T_celsius, params['T_den'])
-    returns params['Vmax'] * arr * den
+    return params['Vmax'] * arr * den
