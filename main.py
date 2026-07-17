@@ -179,7 +179,7 @@ def plot_heatmaps():
             ax.annotate(
                 site_label, (T_s, pH_s),
                 xytext=(5, 5), textcoords='offset points',
-                fontsize=9, fontweight='bold', color='weight',
+                fontsize=9, fontweight='bold', color='white',
                 path_effects=[pef.withStroke(linewidth=2, foreground='black')]
             )
         ax.set_xlabel('Temperature (°C)')
